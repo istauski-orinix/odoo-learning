@@ -21,10 +21,22 @@
                         <field name="title"/>
                         <field name="description"/>
                         <field name="author"/>
+                        <field name="full_title"/>
+                        <field name="page_number"/>
+                        <field name="state"/>
                         <field name="is_available"/>
+                        <field name="is_hefty"/>
+                        <field name="publisher_id"/>
                     </group>
+                    <button name="action_mark_as_featured"
+                        string="Confirm"
+                        type="object"/>
+                    <button name="action_mark_as_archived"
+                        string="Archive"
+                        type="object"
+                        invisible="state != 'draft'"/>
                 </sheet>
-            </form>
+              </form>
         </field>
     </record>
 
