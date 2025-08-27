@@ -7,6 +7,7 @@
                 <field name="title"/>
                 <field name="author"/>
                 <field name="is_available"/>
+                <field name="reading_progress" widget="progressbar"/>
             </list>
         </field>
     </record>
@@ -20,14 +21,19 @@
                     <group>
                         <field name="title"/>
                         <field name="description"/>
+                        <field name="genres" widget="many2many_tags"/>
                         <field name="author"/>
+                        <field name="ISBN"/>
                         <field name="full_title"/>
                         <field name="page_number"/>
                         <field name="state"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,archived,featured,available,else"
+                   statusbar_colors="draft:yellow,archived:blue,featured:red, available:green, else:gray"/>
                         <field name="is_available"/>
                         <field name="is_hefty"/>
                         <field name="publisher_id"/>
                     </group>
+                    <field name="cover_image" widget="image"/>
                     <button name="action_mark_as_featured"
                         string="Confirm"
                         type="object"/>
