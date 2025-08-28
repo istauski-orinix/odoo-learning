@@ -6,7 +6,7 @@ class LibraryBook(models.Model):
 
     title = fields.Char(string='Book Name', required=True)
     author = fields.Char(string='Author', required=True)
-    ISBN = fields.Char(string='ISBN')
+    isbn = fields.Char(string='ISBN')
     genres = fields.Many2many('library.genre', string='Genre')
     description = fields.Text(string='Description', compute='_compute_state')
     page_number = fields.Integer(string='Page Number')
@@ -62,55 +62,8 @@ class LibraryBook(models.Model):
         for book in self:
             if book.state == 'draft':
                 book.state = 'featured'
-            return True
 
     def action_mark_as_archived(self):
         for book in self:
             if book.state == 'draft':
                 book.state = 'archived'
-            return True
-
-class LibraryResPartner(models.Model):
-    _inherit = 'res.partner'
-
-    membership_id = fields.Integer(string='Membership ID')
-
-class LibraryCatalog(models.Model):
-    _inherit = 'library.book'
-
-    def _compute_full_name(self):
-        res = super(LibraryCatalog, self)._compute_full_name()
-        res = f"{self.title} + {self.author} -- COOOOL"
-        self.full_title = res
-
-class LibraryRental(models.Model):
-    _name = 'library.rental'
-    _description = 'Library Book Rental'
-    book_id = fields.Many2one(
-        'library.book',
-        string='Book',
-        required=True,
-        ondelete='cascade'
-    )
-    _inherits = {'library.book': 'book_id'}
-
-    customer_id = fields.Many2one('res.partner', string='Customer', required=True)
-    rental_date = fields.Date(string='Rental Date', default=fields.Date.today)
-    return_date = fields.Date(string='Return Date')
-    state = fields.Selection([
-        ('ongoing', 'Ongoing'),
-        ('returned', 'Returned'),
-    ], string='State', default='ongoing', required=True)
-
-
-class LibraryPublisher(models.Model):
-    _name = 'library.publisher'
-    _description = 'Library Publisher'
-
-    name = fields.Char(string='Publisher', required=True)
-    books = fields.One2many('library.book', 'publisher_id', string='Books')
-
-class LibraryGenre(models.Model):
-    _name = 'library.genre'
-
-    name = fields.Char(string='Genre', required=True)
