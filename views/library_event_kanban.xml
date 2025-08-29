@@ -1,0 +1,29 @@
+<odoo>
+  <record id="view_library_book_kanban" model="ir.ui.view">
+    <field name="name">library.book.kanban</field>
+    <field name="model">library.book</field>
+    <field name="arch" type="xml">
+      <kanban default_group_by="state">
+        <field name="title"/>
+        <field name="author"/>
+        <field name="genres"/>
+        <field name="state"/>
+
+        <templates>
+          <t t-name="kanban-box">
+            <div t-attf-class="oe_kanban_global_click">
+              <div class="oe_kanban_details">
+                <strong><t t-esc="record.title.value"/></strong>
+                <p>
+                  <span>Author: <t t-esc="record.author.value"/></span><br/>
+                  <span>Genres: <t t-esc="record.genres.value"/></span><br/>
+                  <span>State: <t t-esc="record.state.value"/></span>
+                </p>
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+  </record>
+</odoo>

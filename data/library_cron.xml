@@ -1,0 +1,12 @@
+<odoo>
+  <record id="ir_cron_reading_automation" model="ir.cron">
+    <field name="name">Auto read books</field>
+    <field name="model_id" ref="library_module.model_library_book"/>
+    <field name="state">code</field>
+    <field name="code">model.auto_reading()</field>
+    <field name="active">True</field>
+    <field name="interval_type">minutes</field>
+    <field name="interval_number">1</field>
+    <field name="nextcall">2025-08-28 16:20:00</field>
+  </record>
+</odoo>

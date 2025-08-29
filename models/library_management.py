@@ -1,4 +1,8 @@
 from odoo import fields, models, api
+import logging
+import requests
+
+_logger = logging.getLogger(__name__)
 
 class LibraryBook(models.Model):
     _name = 'library.book'
@@ -11,7 +15,7 @@ class LibraryBook(models.Model):
     description = fields.Text(string='Description', compute='_compute_state')
     page_number = fields.Integer(string='Page Number')
     published_date = fields.Date(string='Published Date')
-    reading_progress = fields.Float(string='Reading Progress', default=0.2)
+    reading_progress = fields.Float(string='Reading Progress', default=1.0)
     archived_date = fields.Date(string='Archived Date')
     publisher_id = fields.Many2one('library.publisher', string='Publisher', required=True)
     state = fields.Selection([('draft', 'Draft'),('archived', 'Archived'), ('else', 'Else'),
@@ -67,3 +71,34 @@ class LibraryBook(models.Model):
         for book in self:
             if book.state == 'draft':
                 book.state = 'archived'
+
+    @api.model
+    def auto_reading(self):
+        _logger.info("CRON JOB: 'Auto read books' is running...")
+        featured_books = self.search([('state', '=', 'featured')])
+        for book in featured_books:
+            if book.reading_progress < 100.0:
+                book.reading_progress += 3.0
+            if book.reading_progress >= 100.0:
+                book.state = 'available'
+
+    def action_fetch_book_data(self):
+        records = self.search([('isbn', '!=', '')])
+
+        for record in records:
+            try:
+                isbn = record.isbn
+                url = f"https://openlibrary.org/books/{isbn}.json"
+                response = requests.get(url, timeout=10)
+                response.raise_for_status()
+                data = response.json()
+                _logger.info(f"Book: {data}")
+
+                if data:
+                    record.page_number = data['number_of_pages']
+                    record.title = data['title']
+                else:
+                    _logger.warning("No results found for isbn %s", record.isbn)
+
+            except requests.exceptions.RequestException as e:
+                _logger.error("Error fetching geocode data: %s", e)

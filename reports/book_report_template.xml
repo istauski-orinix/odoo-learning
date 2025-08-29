@@ -1,0 +1,33 @@
+<odoo>
+    <template id="report_event_book">
+        <t t-call="web.html_container">
+        <t t-foreach="books" t-as="book">
+            <div class="page">
+                <h2>Title: <t t-esc="book.title"/></h2>
+                <p><strong>Author:</strong> <t t-esc="book.author"/></p>
+                <p><strong>Genres:</strong> <t t-esc="book.genres"/></p>
+                <p><strong>State:</strong> <t t-esc="book.state"/></p>
+            </div>
+        </t>
+        </t>
+    </template>
+
+    <report
+    id="action_report_event"
+    model="library.book"
+    string="Event Report"
+    report_type="qweb-pdf"
+    name="library_module.report_event_book"
+    file="library_module.report_event_book"
+    />
+
+    <record id="action_report_library_book" model="ir.actions.report">
+            <field name="name">Book List PDF</field>
+            <field name="model">library.book</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">library_module.report_event_book</field>
+            <field name="report_file">library_module.report_event_book</field>
+            <field name="binding_model_id" ref="model_library_book"/>
+            <field name="binding_type">report</field>
+        </record>
+</odoo>
