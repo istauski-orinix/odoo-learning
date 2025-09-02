@@ -4,3 +4,5 @@ access_library_genre,library.genre,model_library_genre,base.group_user,1,1,1,1
 access_library_publisher,library.publisher,model_library_publisher,base.group_user,1,1,1,1
 access_library_book_manager,library_book_manager,model_library_book,library_module.group_library_manager,1,1,1,1
 access_library_book_user,library_book_user,model_library_book,library_module.group_library_user,1,0,0,0
+library_module.access_library_rental,access_library_rental,library_module.model_library_rental,base.group_user,1,1,1,1
+library_module.access_library_book_wizard,access_library_book_wizard,library_module.model_library_book_wizard,base.group_user,1,1,1,1

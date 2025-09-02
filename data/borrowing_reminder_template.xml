@@ -1,0 +1,24 @@
+<odoo>
+    <data>
+        <record id="email_template_borrow_reminder" model="mail.template">
+            <field name="name">Reader borrowing reminder</field>
+            <field name="model_id" ref="library_module.model_library_book"/>
+            <field name="email_from">noreply@bookcorp.juli</field>
+            <field name="email_to">{{ object.borrower_email }}</field>
+            <field name="subject">Follow-Up Reminder: {{ object.title }}</field>
+            <field name="body_html">
+                <![CDATA[
+                    <div style="font-family: Arial, sans-serif; font-size: 14px;">
+                        <p>Dear customer,</p>
+                        <p>We remind that you should return a book - "<strong><t t-out="object.title"/></strong>".</p>
+                        <p>Please, return it as fast as possible.</p>
+                        <p>With regards,<br/>
+                        Library
+                        </p>
+                    </div>
+                ]]>
+            </field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>

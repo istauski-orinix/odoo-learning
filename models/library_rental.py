@@ -18,3 +18,4 @@ class LibraryRental(models.Model):
         ('ongoing', 'Ongoing'),
         ('returned', 'Returned'),
     ], string='State', default='ongoing', required=True)
+

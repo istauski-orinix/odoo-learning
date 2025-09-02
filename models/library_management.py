@@ -7,6 +7,7 @@ _logger = logging.getLogger(__name__)
 class LibraryBook(models.Model):
     _name = 'library.book'
     _description = 'Library Book'
+    _rec_names_search = ['title']
 
     title = fields.Char(string='Book Name', required=True)
     author = fields.Char(string='Author', required=True)
@@ -21,9 +22,11 @@ class LibraryBook(models.Model):
     state = fields.Selection([('draft', 'Draft'),('archived', 'Archived'), ('else', 'Else'),
                               ('available', 'Available'), ('featured', 'Featured')], string='Status')
     cover_image = fields.Image(string='Cover Image')
+    borrowing_id = fields.One2many('library.book.wizard', 'book_id', string='Book')
     is_available = fields.Boolean(string='Is Available', required=True)
     is_hefty = fields.Boolean(string='Is Hefty', compute='_compute_is_hefty')
     full_title = fields.Char(string='Full Title', compute='_compute_full_name', store=True)
+    borrower_email = fields.Char(string='Borrower Email', default='example@mail.com')
 
     _sql_constraints = [
         (
@@ -102,3 +105,9 @@ class LibraryBook(models.Model):
 
             except requests.exceptions.RequestException as e:
                 _logger.error("Error fetching geocode data: %s", e)
+
+    def action_send_book_email(self):
+        template_id = self.env.ref('library_module.email_template_borrow_reminder')
+        for record in self:
+            if template_id:
+                template_id.send_mail(record.id, force_send=True)

@@ -4,3 +4,4 @@ from . import library_catalog
 from . import library_genre
 from . import library_publisher
 from . import res_partner
+from . import library_book_wizard
