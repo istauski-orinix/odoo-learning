@@ -1,0 +1,10 @@
+<odoo>
+  <record id="res_partner_demo_1" model="res.partner">
+    <field name="name">Test Partner 1</field>
+    <field name="email">partner1@example.com</field>
+  </record>
+  <record id="res_partner_demo_2" model="res.partner">
+    <field name="name">Test Partner 2</field>
+    <field name="email">partner2@example.com</field>
+  </record>
+</odoo>
