@@ -1,0 +1,13 @@
+<odoo>
+  <template id="store_website_homepage" name="Store Website Homepage">
+    <section class="store-home">
+      <h1>Welcome to Our Online Store</h1>
+      <p t-if="user_logged_in">
+        Hello, <t t-esc="user_name"/>! Thanks for visiting.
+      </p>
+      <p t-else="">
+        Hello, guest! Please log in for the best experience.
+      </p>
+    </section>
+  </template>
+</odoo>

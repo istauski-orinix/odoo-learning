@@ -1,0 +1,7 @@
+<odoo>
+  <template id="assets_frontend" inherit_id="website.assets_frontend">
+    <xpath expr="." position="inside">
+      <link rel="stylesheet" type="text/scss" href="/store_website/static/src/css/store_style.scss"/>
+    </xpath>
+  </template>
+</odoo>
