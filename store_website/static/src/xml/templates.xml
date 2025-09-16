@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="store_website.MyCounterTemplate" owl="1">
+        <div class="my_counter p-3 border rounded">
+            <h2>Counter: <t t-esc="counter.value"/></h2>
+            <button class="btn btn-primary" t-on-click="increment">Increment</button>
+        </div>
+    </t>
+
+</templates>

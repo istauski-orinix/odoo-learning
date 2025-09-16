@@ -1,0 +1,5 @@
+<odoo>
+  <template id="restricted_content" name="Restricted Content Example">
+      <p>Manager-only information goes here.</p>
+  </template>
+</odoo>

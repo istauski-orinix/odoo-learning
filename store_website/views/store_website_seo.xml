@@ -1,0 +1,8 @@
+<odoo>
+  <template id="store_website_seo_template" name="SEO Example">
+    <t t-set="title">Our Amazing Store Products</t>
+    <div>
+      <h1>Our Products</h1>
+    </div>
+  </template>
+</odoo>

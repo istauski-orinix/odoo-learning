@@ -1,0 +1,10 @@
+<odoo>
+  <template id="inherit_homepage" inherit_id="website.homepage" name="Inherit Odoo Homepage">
+    <xpath expr="//div[@id='wrap']" position="inside">
+      <section class="store-section">
+        <h2>Featured Products</h2>
+        <t t-call="store_website.store_contact_form"/>
+      </section>
+    </xpath>
+  </template>
+</odoo>
