@@ -1,12 +1,13 @@
-$primary-color: #DE964AFF;
+$primary-color: #f3af5c; // Example variable
 
 .store-home {
   background-color: $primary-color;
   padding: 20px;
-  margin: 10px;
+  text-align: center;
   h1 {
     color: #ffffff;
     text-transform: uppercase;
-    text-shadow: 1px 1px 2px black;
+    margin: 5px;
+    text-shadow: black 2px 2px;
   }
 }
