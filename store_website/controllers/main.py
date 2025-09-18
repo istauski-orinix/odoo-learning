@@ -52,3 +52,13 @@ class StoreManagerController(http.Controller):
         if not request.env.user.has_group("store_website.group_store_manager"):
             return request.redirect("/1231ismfwkfow")
         return http.request.render("store_website.restricted_content")
+
+
+@http.route(
+    ['/store/product/<model("store.contact"):name>'],
+    type="http",
+    auth="public",
+    website=True,
+)
+def contact(self, contact, **kwargs):
+    return request.render("store_website.product_page_template", {"contact": contact})

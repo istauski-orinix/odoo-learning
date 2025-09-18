@@ -13,11 +13,7 @@
     ],
     "assets": {
         "web.assets_frontend": [
-            "/store_website/static/src/css/store_style.scss",
-            "/store_website/static/src/js/script.js",
-            "/store_website/static/src/xml/templates.xml",
-            "/store_website/static/src/js/owl/MyCounter.js",
-            "/store_website/static/src/js/owl/MountMyCounter.js",
+            "store_website/static/src/**/*",
         ],
     },
     "installable": True,
